@@ -1,0 +1,28 @@
+.card {
+    color: #fff;
+    .card-body {
+    	margin: 35px;
+    }
+}
+input.form-control {
+    background: transparent!important;
+    border: 0px;
+    border-bottom: 1px solid #0060fd;
+    line-height: 25px;
+    border-radius: 0px;
+    padding-left: 0px;
+    margin-top:0px;
+    color: #fff;
+    outline:none!important;
+}
+select.form-control {
+    background: transparent!important;
+    border: 0px;
+    border-bottom: 1px solid #0060fd;
+    line-height: 25px;
+    border-radius: 0px;
+    padding-left: 0px;
+    margin-top:0px;
+    color: #fff;
+    outline:none!important;
+}

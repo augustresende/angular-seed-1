@@ -1,4 +1,22 @@
-:host {
-  display: block;
-  box-shadow: 0 0 2px #aaa;
+header {
+  padding:10px;
+  .borda {
+  	float: left;
+  	background: #0046e3;
+  	height: 50px;
+  	margin-right: 20px;
+  	width: 4px;
+  }
+  .text {
+  	line-height: 50px;
+  	font-family: Roboto;
+  	color: #fff;
+  	font-size: 21px;
+  }
+}
+.logo img {
+    width: 40px;
+    float: left;
+    margin-right: 30px;
+    margin-left: 10px;
 }

@@ -3,10 +3,10 @@ import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgProgressModule, NgProgressBrowserXhr, NgProgressInterceptor } from 'ngx-progressbar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Import HttpClientModule from @angular/common/http
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptor } from '../auth/interceptors/token.interceptor';
 
 import { AppComponent } from './containers/app/app.component';
 
@@ -19,6 +19,7 @@ export const COMPONENTS = [
   imports: [
     CommonModule,
     SharedModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     NgProgressModule
   ],
@@ -30,7 +31,6 @@ export class CoreModule {
     return {
       ngModule: CoreModule,
       providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: NgProgressInterceptor, multi: true }
       ],
     };

@@ -1,4 +1,61 @@
 <ng-progress [speed]="200" [color]="'#fc6fb1'" [showSpinner]="false" [ease]="'easeOutQuad'" [trickleSpeed]="250"></ng-progress>
 <ng2-toasty [position]="'top-right'"></ng2-toasty>
 <app-header [isLoggedIn]="isLoggedIn$ | async" (logoutClick)="logout()"></app-header>
-<router-outlet></router-outlet>
+<div class="row">
+	<div class="col-md-9">
+		<div class="tabs">
+			<div [routerLink]='["/pagar/boleto"]' routerLinkActive="active" class="tab">
+				<div class="icon"><i class="ion ion-ios-barcode-outline"></i></div>
+				<div class="text">Boletos</div>
+			</div>
+			<div [routerLink]='["/pagar/recarga"]' routerLinkActive="active" class="tab">
+				<div class="icon"><i class="ion ion-ios-phone-portrait-outline"></i></div>
+				<div class="text">Recarga</div>
+			</div>
+			<div class="tab">
+				<div class="icon"><i class="ion ion-ios-play-outline"></i></div>
+				<div class="text">Google Play</div>
+			</div>
+			<div class="tab">
+				<div class="icon"><i class="ion ion-ios-desktop-outline"></i></div>
+				<div class="text">Tv Pré-Pago</div>
+			</div>
+			<div class="tab">
+				<div class="icon"><i class="ion ion-ios-game-controller-b-outline"></i></div>
+				<div class="text">Jogos</div>
+			</div>
+			<div class="tab">
+				<div class="icon"><i class="ion ion-ios-phone-portrait-outline"></i></div>
+				<div class="text">Recarga</div>
+			</div>
+		</div>
+		<div class="router" [@changePage]="getPage(appOutlet)">	
+			<router-outlet #appOutlet="outlet"></router-outlet>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div style="margin-top:20px;">
+			
+		</div>
+		<div class="card card-chart">
+		  <div class="card-body">
+		    <h5 class="card-title">Cotação Atual</h5>
+		    <p class="card-price">R$ 66,43</p>
+		    <a href="#" class="card-link">Gráfico Completo</a>
+		    <a href="#" class="card-link"></a>
+		  </div>
+		</div>
+		<div style="margin-top: 30px;" class="card card-padron">
+		  <div class="card-body">
+		    <h5 class="card-title">Dúvidas Frequentes</h5>
+		    <ul class="list-group list-group-flush">
+			    <li class="list-group-item">Como Funciona?</li>
+			    <li class="list-group-item">Quanto tempo demora?</li>
+			    <li class="list-group-item">Verificar Status</li>
+			    <li class="list-group-item">Confiança</li>
+
+			  </ul>
+		  </div>
+		</div>
+	</div>
+</div>

@@ -1,23 +1,18 @@
-import { Logout } from './../../../auth/store/actions/auth.actions';
-import { AuthService } from './../../../auth/services/auth.service';
-import { Observable } from 'rxjs/Observable';
-import { Store } from '@ngrx/store';
 import { Component } from '@angular/core';
-import * as fromAuth from '../../../auth/store/reducers';
+import { changePage } from './../../../shared/animations/fade-in.animation';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [ changePage ]
 })
 export class AppComponent {
-  isLoggedIn$: Observable<boolean>;
-
+  i:number = 0;
   constructor(
-    private store: Store<fromAuth.State>
   ) {
-    this.isLoggedIn$ = this.store.select(fromAuth.getLoggedIn);
   }
-
-  logout() { this.store.dispatch(new Logout()); }
+  getPage(outlet) {
+	  return outlet.activatedRouteData.page;
+	}
 }

@@ -1,0 +1,128 @@
+<div class="card" style=" margin:10px auto; margin-rigth: 20px;" >
+  <div class="card-body" style="max-width:42rem;width:100%; margin:0 auto;">
+    <h5 class="card-title">Pagar Boleto</h5>
+    <p class="card-text">Insira o código do boleto para realizar o pagamento</p>
+    <br>
+
+    <div class="form-group">
+     <label for="exampleFormControlInput1">Linha Digitavel</label>
+     <input type="email" class="form-control" placeholder="ex.: 23793380295009031431613006333309264440000010000">
+   </div>
+   <div class="row">
+    <div class="col">
+     <div class="form-group">
+       <label for="exampleFormControlInput1">Vencimento</label>
+       <input type="email" class="form-control" placeholder="ex.: 03/12/2015">
+     </div>
+   </div>
+   <div class="col">
+     <div class="form-group">
+       <label for="exampleFormControlInput1">Valor</label>
+       <input type="email" class="form-control" placeholder="ex.: 100,00">
+     </div>
+   </div>
+ </div>
+
+ <br>
+ <br>
+ <div style="float:rigth">
+  <button  [swal]="{ title: 'Escreva seu Email:', input: 'email' }" (confirm)="openModal(template)" type="button" class="btn btn-primary">Continuar Pagamento</button>
+</div>
+</div>
+</div>
+
+<ng-template #template class="modal-pay">
+  <div class="modal-header">
+    <h4 style="padding-left:30px;" class="modal-title pull-left">Confirme o pagamento:</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" style="padding-left:50px; padding-right:50px; padding-bottom:50px;">
+  	<div class="">
+  		<div style="float:">
+        <div style="line-height: 50px;font-size: 18px;">
+          Realize o depósito de <b>5,4345 RaiBlocks</b> na carteira:
+        </div>
+        <img style="width: 130px;background: #fff;margin: 14px auto!important;border-radius: 4px;display: block;" src="https://upload.wikimedia.org/wikipedia/commons/c/c6/WM2007_QRCode.svg"  alt="">
+      </div>
+      <div style="text-align:center; width:100%; opacity:0.3;">
+       Ou
+     </div>
+     <div class="form-group">
+      <input type="email" class="form-control" value="xrb_1bm9y3b895xojaedgujrjo8u56umwdu7tkfttbwh7uugy3yg5h4csterjkpo">
+    </div>
+  </div>
+  <br>
+
+  <div style="text-align:right">
+    * Expira em: {{tick}} segundos
+  </div> 
+  <div class="bar">
+
+    <div class="complete" [style.width.%]="tick/320*100"></div>
+    <br>
+  </div>
+  <br>
+  <button (click)="modalRef.hide() || openComprovante(comprovante)"  class="btn btn-primary">Continuar</button>
+
+
+</div>
+</ng-template>
+
+<div class="comprovante-modal">
+<ng-template #comprovante class="modal-pay">
+  <div class="modal-header">  
+    <h4 style="padding-left:30px;" class="modal-title pull-left">Comprovante de Pagamento:</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalComprovante.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body comp" id="comprovante" style="padding-left:50px; background:#001432; padding-right:50px; padding-bottom:50px;">
+    <!-- <img src="/assets/images/XRB.svg" class="bg" alt=""> -->
+
+    <header>
+  <div class="borda"></div>
+  <div class="logo">
+    <img src="/assets/images/XRB.svg" alt="">
+  </div>
+  <div class="text">Pague com Raiblocks</div>
+</header><!-- /header -->
+    <hr>
+    <h4><b>PAGAMENTO DE BOLETO</b></h4>
+    <p>PROTOCOLO  <b> 0014785441</b> - <b>29/01/2018 11:01</b></p>
+    <p>TERM <b>228022</b> AGENTE <b>228018</b> AUTE <b>00942</b> </p>
+    <hr>
+    <p>03399.88081 09000.070004 05217.201010 6 74200000066163 </p>
+    <p>AUTO <b>014025</b> RECEBIMENTO CONTA</p>
+    <p>BANCO <b>SANTANDER S.A</b></p>
+    <hr>
+    <h5>VALOR: R$ 661,63</h5>
+    <p style="font-size: 10px!important;margin-top: -8px;">VALIDO COMO RECIBO DE PAGAMENTO</p>
+
+
+    
+  </div>
+  <div style="display:none;">
+    <canvas id="canvas"></canvas>
+  </div>
+  <button (click)="printComprovante()" class="btn btn-primary"> Imprimir </button>
+</ng-template>
+</div>
+
+PAGUE COM RAIBLOCKS
+
+
+<swal
+#success
+title="Pagamento Aguardando Confirmação"
+text="Assim que seu pagamento for confirmado  você receberá um email."
+type="success">
+</swal>
+
+<swal [timer]="4000" customClass="loading" #loading title="Já recebemos o seu pagamento e estamos recarregando o seu celular, é rapidinho 😉">
+  <div  *swalPartial>
+  <img style="max-width:110px; margin:0 auto;border-radius: 30px;margin-top:25px; display:block; background:#fff;" src="/assets/images/loading.svg" alt="">
+    
+  </div>
+<swal>

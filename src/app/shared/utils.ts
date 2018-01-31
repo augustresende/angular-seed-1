@@ -26,14 +26,6 @@ export class CustomRouterStateSerializer
 }
 
 export class Utils {
-  /**
-   * Removes invalid/empty data from DTO
-   *
-   * @static
-   * @param {any} [actualData={}]
-   * @returns
-   * @memberof SearchService
-   */
   public static sanitizeData(actualData = {}): any {
     const keys = Object.keys(actualData);
 

@@ -3,17 +3,24 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
-import { HomeComponent } from './containers/home/home.component';
+import { BoletosComponent } from './containers/boletos/boletos.component';
+import { RecargaComponent } from './containers/recarga/recarga.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
+
 
 const COMPONENTS = [
-  HomeComponent
+  BoletosComponent,
+  RecargaComponent
 ];
 
 @NgModule({
   imports: [
     CommonModule,
+    ModalModule,
     HomeRoutingModule,
-    SharedModule
+    SharedModule,
+    SweetAlert2Module
   ],
   declarations: [
     ...COMPONENTS

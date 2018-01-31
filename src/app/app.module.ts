@@ -1,4 +1,3 @@
-import { AuthModule } from './auth/auth.module';
 import { CoreModule } from './core/core.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -8,7 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { AppComponent } from './core/containers/app/app.component';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -47,6 +46,7 @@ import 'rxjs/add/operator/retry';
      * @ngrx/router-store keeps router state up-to-date in the store.
      */
     StoreRouterConnectingModule,
+    SweetAlert2Module.forRoot(),
 
     /**
      * Store devtools instrument the store retaining past versions of state
@@ -69,9 +69,7 @@ import 'rxjs/add/operator/retry';
      */
     EffectsModule.forRoot([]),
 
-    CoreModule.forRoot(),
-
-    AuthModule.forRoot()
+    CoreModule.forRoot()
   ],
   providers: [
     /**

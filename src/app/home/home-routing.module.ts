@@ -1,6 +1,5 @@
 import { BoletosComponent } from './containers/boletos/boletos.component';
 import { RecargaComponent } from './containers/recarga/recarga.component';
-import { HomePageComponent } from './containers/home/home.component';
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';

@@ -245,6 +245,10 @@ modal-container {
 }
 @media (max-width: 600px) 
 {
+    img.ng-tns-c0-0 {
+    width: 30px;
+    height: 30px!important;
+}
 // Media Query Celulares
 .tabs .tab {
     margin: 0px!important;

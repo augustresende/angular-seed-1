@@ -1,12 +1,12 @@
-<div class="card" style=" margin:10px auto" >
+<div class="card" style="margin:10px auto; margin-left: 20px;" >
   <div class="card-body">
-    <h5 class="card-title" style="width:340px; margin:0 auto;">Recarga de Celular</h5>
+    <h2 class="card-title" style="width:340px; margin:0 auto; text-align: center;">Recarga de Celular</h2>
     <br>
 
-    <div class="form-group" style="width:340px; margin:0 auto;">
-     <label for="exampleFormControlInput1">Número do seu celular</label>
-     <input [textMask]="{mask: phoneMask}" style="font-size:24px;" type="text" class="form-control" placeholder="ex.: (45) 99101-9920">
-     <img src="assets/images/claro.png" alt="">
+    <div class="form-group" style="width:28ch; margin:0 auto;">
+     <label for="exampleFormControlInput1">Digite o número do celular:</label>
+     <input [textMask]="{mask: phoneMask, guide: false}" style="font-size:30px;" type="text" class="form-control" placeholder="(99) 99999-9999" value="">
+     <img class="logoop" src="assets/images/claro.png" alt="">
    </div>
    <br>
    <div class="form-group" style="width:340px; margin:0 auto;">
@@ -14,15 +14,15 @@
      <div style="margin: 0 auto!important;display: flex;">
      	
      
-     <div style="margin: 0 auto;" class="btn-group btn-group-toggle orm-control" data-toggle="buttons">
+<div style="margin: 0 auto;" class="btn-group btn-group-toggle orm-control rechargevalues" data-toggle="buttons">
   <label class="btn btn-primary active">
-    <input type="radio" name="options" id="option1" autocomplete="off" checked> R$ 20
+    <input type="radio" name="options" autocomplete="off" checked> R$ 20
   </label>
   <label class="btn btn-primary">
-    <input type="radio" name="options" id="option2" autocomplete="off"> R$ 15
+    <input type="radio" name="options" autocomplete="off"> R$ 15
   </label>
   <label class="btn btn-primary">
-    <input type="radio" name="options" id="option3" autocomplete="off"> R$ 13
+    <input type="radio" name="options" autocomplete="off"> R$ 13
   </label>
 </div>
 </div>
@@ -31,7 +31,7 @@
 	<br>
 	<br>
 	<div style="">
-		<button style="margin:0 auto; display:block;" type="button" class="btn btn-primary">Realizar Recarga</button>
+		<button style="margin:0 auto; display:block;" type="button" class="btn btn-primary">Recarregar!</button>
 	</div>
   </div>
 </div>

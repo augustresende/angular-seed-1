@@ -4,7 +4,7 @@
     	margin: 35px;
     }
 }
-h5 {
+h3 {
     text-align: center;
 }
 label {
@@ -19,27 +19,32 @@ select.custom-select {
 p {
     text-align: center;
 }
-.form-group img {
-    width: 30px;
+.logoop {
+    width: 40px;
     position: absolute;
-    right: 5px;
-    bottom: 5px;
+    right: -45px;
+    bottom: 8px;
 }
 
 .form-group {
     position: relative;
 }
+
 input.form-control {
-    text-align: center;
+    text-align: left;
     background: transparent!important;
     border: 0px;
     border-bottom: 1px solid #0060fd;
-    line-height: 25px;
     border-radius: 0px;
-    padding-left: 0px;
-    margin-top:0px;
+    padding-left: 3px;
+	padding-right: 3px;
+    margin-top: 0px;
     color: #fff;
     outline:none!important;
+}
+input.form-control:focus {
+    box-shadow: none;
+	background: rgba(0, 0, 0, 0.1450980392156863) !important;
 }
 select.form-control {
     background: transparent!important;
@@ -51,4 +56,9 @@ select.form-control {
     margin-top:0px;
     color: #fff;
     outline:none!important;
+}
+
+.rechargevalues .btn {
+	border: 4px solid transparent;
+	font-size: 1.5rem;
 }

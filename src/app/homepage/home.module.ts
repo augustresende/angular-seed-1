@@ -3,17 +3,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
-import { BoletosComponent } from './containers/boletos/boletos.component';
-import { RecargaComponent } from './containers/recarga/recarga.component';
+import { HomePageComponent } from './home.component';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import { TextMaskModule } from 'angular2-text-mask';
 
-
 const COMPONENTS = [
-  BoletosComponent,
-  RecargaComponent
+  HomePageComponent
 ];
 
 @NgModule({
@@ -29,4 +26,4 @@ const COMPONENTS = [
     ...COMPONENTS
   ]
 })
-export class HomeModule { }
+export class HomePgModule { }

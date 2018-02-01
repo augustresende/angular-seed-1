@@ -1,12 +1,31 @@
 <div class="card" style=" margin:10px auto" >
   <div class="card-body">
-    <h5 class="card-title">Recarga de Celular</h5>
+    <h5 class="card-title" style="width:340px; margin:0 auto;">Recarga de Celular</h5>
     <br>
 
     <div class="form-group" style="width:340px; margin:0 auto;">
      <label for="exampleFormControlInput1">Número do seu celular</label>
      <input [textMask]="{mask: phoneMask}" style="font-size:24px;" type="text" class="form-control" placeholder="ex.: (45) 99101-9920">
      <img src="assets/images/claro.png" alt="">
+   </div>
+   <br>
+   <div class="form-group" style="width:340px; margin:0 auto;">
+     <label style="width:100%;" for="exampleFormControlInput1">Valor desejado:</label>
+     <div style="margin: 0 auto!important;display: flex;">
+     	
+     
+     <div style="margin: 0 auto;" class="btn-group btn-group-toggle orm-control" data-toggle="buttons">
+  <label class="btn btn-primary active">
+    <input type="radio" name="options" id="option1" autocomplete="off" checked> R$ 20
+  </label>
+  <label class="btn btn-primary">
+    <input type="radio" name="options" id="option2" autocomplete="off"> R$ 15
+  </label>
+  <label class="btn btn-primary">
+    <input type="radio" name="options" id="option3" autocomplete="off"> R$ 13
+  </label>
+</div>
+</div>
    </div>
 
 	<br>

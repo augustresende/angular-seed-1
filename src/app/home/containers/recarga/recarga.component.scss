@@ -7,6 +7,10 @@
 h5 {
     text-align: center;
 }
+label {
+    text-align: center!important;
+    width: 100%;
+}
 select.custom-select {
     background: #001432;
     color: #fff;
@@ -26,6 +30,7 @@ p {
     position: relative;
 }
 input.form-control {
+    text-align: center;
     background: transparent!important;
     border: 0px;
     border-bottom: 1px solid #0060fd;

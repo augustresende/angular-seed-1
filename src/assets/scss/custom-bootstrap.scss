@@ -2,7 +2,7 @@
 @import "~bootstrap/scss/functions";
 // Darkly 4.0.0
 // Bootswatch
-
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
 //
 // Color system
 //
@@ -265,4 +265,8 @@ modal-container {
     display:block;
     margin: 0px -10px;
 }
+.modal-body.comp {
+    padding: 20px!important;
 }
+}
+

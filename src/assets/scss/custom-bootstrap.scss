@@ -200,8 +200,13 @@ $close-text-shadow:                 none !default;
 @import "~bootstrap/scss/popover";
 @import "~bootstrap/scss/carousel";
 @import "~bootstrap/scss/utilities";
+HTML {
+	background-image: url("/assets/images/background.png");
+	background-color: #00193f;
+}
 body {
-	background: #00193f;
+	background: linear-gradient(to bottom, #00317b 0%, rgba(0, 48, 123, 0.99) 2%, rgba(0, 48, 123, 0.98) 5%, rgba(0, 31, 78, 0.97) 100%);
+	min-height: 100vh;
 	font-family: Roboto;
 }
 $ionicons-font-path: "~ionicons/dist/fonts";
@@ -220,15 +225,21 @@ modal-container {
 	    z-index: 10060!important;
 	    color: #fff;
 }
+
+.card {
+	background-color: rgba(0, 0, 0, 0.27) !important;
+}
+
+.tab.first {
+	margin-left: 0px!important;
+}
+
 @media (max-width: 1100px) 
 {
 // Media Query Celulares
 .tabs .tab{
 	margin: 0px!important;
 	height: 124px!important;
-}
-.tabs{
-	margin-left: 20px;
 }
 .tab .icon {
     margin: 30px 0px !important;
@@ -242,13 +253,12 @@ modal-container {
 .tab .text {
     margin: 0px -10px;
 }
+.tab .icon img {
+	height: 32px !important;
+}
 }
 @media (max-width: 600px) 
 {
-    img.ng-tns-c0-0 {
-    width: 30px;
-    height: 30px!important;
-}
 // Media Query Celulares
 .tabs .tab {
     margin: 0px!important;
@@ -262,10 +272,10 @@ modal-container {
     margin-right: 0px;
 }
 .tabs {
-        margin-left: 0px;
+    margin-left: 0px;
 }
 .card {
-        margin-left: 0px!important;
+    margin-left: 0px!important;
 }
 .tab .icon {
     line-height: 26px!important;

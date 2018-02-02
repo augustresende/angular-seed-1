@@ -5,7 +5,7 @@
 
     <div class="form-group" style="width:28ch; margin:0 auto;">
      <label for="exampleFormControlInput1">Digite o número do celular:</label>
-     <input [textMask]="{mask: phoneMask, guide: false}" style="font-size:30px;" type="text" class="form-control" placeholder="(99) 99999-9999" value="">
+     <input [(ngModel)]="recarga.number" [textMask]="{mask: phoneMask, guide: false}" style="font-size:30px;" type="text" class="form-control" placeholder="(99) 99999-9999" value="">
      <img class="logoop" src="assets/images/vivo.png" alt="">
    </div>
    <br>
@@ -15,14 +15,15 @@
      	
      
 <div style="margin: 0 auto;" class="btn-group btn-group-toggle orm-control rechargevalues" data-toggle="buttons">
-  <label class="btn btn-primary active">
-    <input type="radio" name="options" value="20" autocomplete="off" checked> R$ 20
+  <label class="btn btn-primary" [ngClass]="{'active':recarga.value==13}">
+        <input type="radio" [(ngModel)]="recarga.value"  name="ta" value="13">R$ 13
   </label>
-  <label class="btn btn-primary">
-    <input type="radio" name="options" value="15" autocomplete="off"> R$ 15
+  <label class="btn btn-primary" [ngClass]="{'active':recarga.value==15}">
+    <input type="radio" [(ngModel)]="recarga.value"  name="tb" value="15">R$ 15
   </label>
-  <label class="btn btn-primary">
-    <input type="radio" name="options" value="13" autocomplete="off"> R$ 13
+  <label class="btn btn-primary" [ngClass]="{'active':recarga.value==20}">
+    <input type="radio" [(ngModel)]="recarga.value"  name="ta" value="20">R$ 20
+    
   </label>
 </div>
 </div>
@@ -31,7 +32,7 @@
 	<br>
 	<br>
 	<div style="">
-		<button style="margin:0 auto; display:block;" type="button" class="btn btn-primary">Recarregar!</button>
+		<button (click)="submitRecarga()" style="margin:0 auto; display:block;" type="button" class="btn btn-primary">Recarregar!</button>
 	</div>
   </div>
 </div>

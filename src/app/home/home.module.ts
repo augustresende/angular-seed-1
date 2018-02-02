@@ -1,6 +1,8 @@
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 
 import { HomeRoutingModule } from './home-routing.module';
 import { BoletosComponent } from './containers/boletos/boletos.component';
@@ -19,6 +21,7 @@ const COMPONENTS = [
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     ModalModule,
     TextMaskModule,
     HomeRoutingModule,

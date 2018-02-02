@@ -1,6 +1,8 @@
 import { HeaderComponent } from './components/header/header.component';
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
 import { CommonModule } from '@angular/common';
 import { NgProgressModule, NgProgressBrowserXhr, NgProgressInterceptor } from 'ngx-progressbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,6 +20,7 @@ export const COMPONENTS = [
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     SharedModule,
     BrowserAnimationsModule,
     HttpClientModule,

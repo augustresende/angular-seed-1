@@ -16,6 +16,10 @@ import { CustomRouterStateSerializer } from './shared/utils';
 
 import { environment } from '../environments/environment';
 
+import { HttpModule } from '@angular/http';
+
+import * as io from 'socket.io-client';
+
 // RX imports
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
@@ -32,6 +36,7 @@ import 'rxjs/add/operator/retry';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+	HttpModule,
 
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer

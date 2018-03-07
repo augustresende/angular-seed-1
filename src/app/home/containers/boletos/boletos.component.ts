@@ -19,6 +19,7 @@ import {ngOnInit} from './boletos.ngOnInit';
 export class BoletosComponent implements OnInit {
 	modalRef: BsModalRef;
 	modalComprovante: BsModalRef;
+	err:any='';
 
 	masks:any = {
 		codeNormal: [/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/, '.',/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,' ',/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,'.',/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,' ',/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,'.',/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,' ',/[0-9]/,' ',/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/],
@@ -43,38 +44,43 @@ export class BoletosComponent implements OnInit {
 			if (code.substr(33,4).length == 4) {
 				var vencimento = ("0" + dataVenc.getDate()).substr(-2) + "/" + ("0" + (dataVenc.getMonth() + 1)).substr(-2) + "/" + dataVenc.getFullYear();
 				this.datavencimento = vencimento;
+				this.data.vencimento = vencimento;
 			}
 			if (code.substr(37).length == 10) {
 				var value = parseInt(code.substr(37)) / 100;
 				this.datavalue = value.toFixed(2).replace(/\./g, ',');
+				this.data.value = this.datavalue;
 			}
-			
+			this.err = '';
 			if (code.substr(0,10).length == 10) {
 				if (code.substr(9,1) != this.calculadv(code.substr(0,9))) {
-					console.log("Digito verificador C1 inválido");
+					this.err = ("Digito verificador C1 inválido");
 				}
 			}
 			
 			if (code.substr(10,11).length == 11) {
 				if (code.substr(20,1) != this.calculadv(code.substr(10,10))) {
-					console.log("Digito verificador C2 inválido");
+					this.err = ("Digito verificador C2 inválido");
 				}
 			}
 			
 			if (code.substr(21,11).length == 11) {
 				if (code.substr(31,1) != this.calculadv(code.substr(21,10))) {
-					console.log("Digito verificador C3 inválido");
+					this.err = ("Digito verificador C3 inválido");
 				}
 			}
 			
 			if (code.length == 47) {
 				if (code.substr(32,1) != this.calculadvtotal(code.substr(0,32)+code.substr(33))) {
-					console.log("Digito verificador codigo de barras inválido");
+					this.err = ("Digito verificador codigo de barras inválido");
 				}
 			}
 			
 			return this.masks.codeNormal;
 		}else {
+			this.err = '';
+			this.datavalue = null;
+			this.datavencimento = null;
 			return this.masks.codeConvenio;
 		}
 		
@@ -133,6 +139,8 @@ export class BoletosComponent implements OnInit {
 
 
 	tick: number = 320;
+	tick_total: number = 320;
+
   	private subscription: Subscription;
 
 	constructor( private modalService: BsModalService, public socket:SocketService ) {
@@ -141,15 +149,17 @@ export class BoletosComponent implements OnInit {
 
 	openModal(template: TemplateRef<any>, template2: TemplateRef<any>, event) {
 		let newData = this.data;
-		newData.value = this.datavalue.replace('R$ ','');
+		newData.value = newData.value.replace('R$ ','');
 		newData.code = newData.code.replace(/ /g, '').replace(/\./g, '').replace(/_/g, '');
 		newData.email = event;
-		newData.vencimento = this.datavencimento;
+		newData.vencimento = newData.vencimento;
 		this.socket.sendMessage(newData);
 
 		this.socket.socket
 		.on('paybill', (data:any) => {
 			console.log(data);
+			this.tick = data.expire;
+			this.tick_total = data.expire;
 			this.pagamento = data;
 			this.modalRef = this.modalService.show(template);
 		})

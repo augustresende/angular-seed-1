@@ -12,21 +12,22 @@
     <div class="col">
      <div class="form-group">
        <label for="bl-vencimento">Vencimento</label>
-       <input [textMask]="{mask: masks.date}" name="bl-vencimento" [(ngModel)]="datavencimento" type="text" class="form-control" placeholder="00/00/0000">
+       <input [disabled]="datavencimento" [textMask]="{mask: masks.date}" name="bl-vencimento" [(ngModel)]="data.vencimento" type="text" class="form-control" placeholder="00/00/0000">
      </div>
    </div>
    <div class="col">
      <div class="form-group">
        <label for="bl-valor">Valor</label>
-       <input name="bl-valor" [textMask]="{mask: masks.value}" [(ngModel)]="datavalue" type="text" class="form-control" placeholder="R$ 0,00">
+       <input [disabled]="datavalue" name="bl-valor" [textMask]="{mask: masks.value}" [(ngModel)]="data.value" type="text" class="form-control" placeholder="R$ 0,00">
      </div>
    </div>
  </div>
 
  <br>
+ <div *ngIf="err" class="err"> {{err}}</div>
  <br>
  <div style="float:rigth">
-  <button [swal]="{ title: 'Digite seu Email:', input: 'email' }" (confirm)="openModal(template, comprovante, $event)" type="button" class="btn btn-primary">Pagar meu boleto!</button>
+  <button [disabled]="err.length>0" [swal]="{ title: 'Digite seu Email:', input: 'email' }" (confirm)="openModal(template, comprovante, $event)" type="button" class="btn btn-primary">Pagar meu boleto!</button>
  </div>
 </div>
 </div>
@@ -60,7 +61,7 @@
   </div> 
   <div class="bar">
 
-    <div class="complete" [style.width.%]="tick/320*100"></div>
+    <div class="complete" [style.width.%]="tick/tick_total*100"></div>
     <br>
   </div>
   <br>

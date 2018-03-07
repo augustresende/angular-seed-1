@@ -5,20 +5,20 @@
     <br>
 
     <div class="form-group">
-     <label for="exampleFormControlInput1">Linha Digitavel</label>
-     <input type="email" class="form-control" placeholder="00000.00000 00000.000000 00000.000000 0 00000000000000">
+     <label for="bl-code">Linha Digitavel</label>
+     <input name="bl-code" [textMask]="{mask: getCodeMask()}" [(ngModel)]="data.code" type="text" class="form-control" placeholder="00000.00000 00000.000000 00000.000000 0 00000000000000">
    </div>
    <div class="row">
     <div class="col">
      <div class="form-group">
-       <label for="exampleFormControlInput1">Vencimento</label>
-       <input type="email" class="form-control" placeholder="00/00/0000">
+       <label for="bl-vencimento">Vencimento</label>
+       <input [textMask]="{mask: masks.date}" name="bl-vencimento" [(ngModel)]="data.vencimento" type="text" class="form-control" placeholder="00/00/0000">
      </div>
    </div>
    <div class="col">
      <div class="form-group">
-       <label for="exampleFormControlInput1">Valor</label>
-       <input type="email" class="form-control" placeholder="R$ 0,00">
+       <label for="bl-valor">Valor</label>
+       <input name="bl-valor" [textMask]="{mask: masks.value}" [(ngModel)]="data.value" type="text" class="form-control" placeholder="R$ 0,00">
      </div>
    </div>
  </div>
@@ -26,7 +26,7 @@
  <br>
  <br>
  <div style="float:rigth">
-  <button [swal]="{ title: 'Escreva seu Email:', input: 'email' }" (confirm)="openModal(template,$event)" type="button" class="btn btn-primary">Continuar Pagamento</button>
+  <button [swal]="{ title: 'Escreva seu Email:', input: 'email' }" (confirm)="openModal(template, $event)" type="button" class="btn btn-primary">Continuar Pagamento</button>
  </div>
 </div>
 </div>
@@ -42,7 +42,7 @@
   	<div class="">
   		<div style="float:">
         <div style="line-height: 50px;font-size: 18px;">
-          Realize o depósito de <b>5,4345 RaiBlocks</b> na carteira:
+          Realize o depósito de <b>{{pagamento.crypto_value}} RaiBlocks</b> na carteira:
         </div>
         <img style="width: 130px;background: #fff;margin: 14px auto!important;border-radius: 4px;display: block;" src="https://upload.wikimedia.org/wikipedia/commons/c/c6/WM2007_QRCode.svg"  alt="">
       </div>
@@ -50,7 +50,7 @@
        Ou
      </div>
      <div class="form-group">
-      <input type="email" class="form-control" value="xrb_1bm9y3b895xojaedgujrjo8u56umwdu7tkfttbwh7uugy3yg5h4csterjkpo">
+      <input type="email" class="form-control" [value]="pagamento.address">
     </div>
   </div>
   <br>

@@ -27,8 +27,8 @@ export class BoletosComponent implements OnInit {
 
 	constructor(private modalService: BsModalService) {}
 
-	openModal(template: TemplateRef<any>) {
-
+	openModal(template: TemplateRef<any>, event) {
+		console.log(event);
 		this.modalRef = this.modalService.show(template);
 	}
 	openComprovante(template: TemplateRef<any>) {
@@ -38,15 +38,12 @@ export class BoletosComponent implements OnInit {
 		},4000);
 	}
 	printComprovante() {
-
 		html2canvas(document.querySelector("#comprovante"))
 		.then(canvas => {
 			canvas.toBlob((	blob ) => {
 				FileSaver.saveAs(blob, "comprovante.png");   
 			})
 		});
-
-		 
 	}
 	ngOnInit() {
 		let timer = TimerObservable.create(2000, 1000);

@@ -13,7 +13,7 @@ class Recarga {
 export class RecargaComponent implements OnInit {
 public phoneMask = ['(', /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]
 
-	recarga:Recarga = new Recarga();	
+  recarga:Recarga = new Recarga();	
 
   constructor() {
   }

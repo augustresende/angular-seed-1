@@ -26,8 +26,8 @@
  <br>
  <br>
  <div style="float:rigth">
-  <button  [swal]="{ title: 'Escreva seu Email:', input: 'email' }" (confirm)="openModal(template)" type="button" class="btn btn-primary">Continuar Pagamento</button>
-</div>
+  <button [swal]="{ title: 'Escreva seu Email:', input: 'email' }" (confirm)="openModal(template,$event)" type="button" class="btn btn-primary">Continuar Pagamento</button>
+ </div>
 </div>
 </div>
 

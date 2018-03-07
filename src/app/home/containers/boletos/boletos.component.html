@@ -27,7 +27,7 @@
  <div *ngIf="err" class="err"> {{err}}</div>
  <br>
  <div style="float:rigth">
-  <button [disabled]="err.length>0" [swal]="{ title: 'Digite seu Email:', input: 'email' }" (confirm)="openModal(template, comprovante, $event)" type="button" class="btn btn-primary">Pagar meu boleto!</button>
+  <button [disabled]="buttondisabled" [swal]="{ title: 'Digite seu Email:', input: 'email' }" (confirm)="openModal(template, comprovante, $event)" type="button" class="btn btn-primary">Pagar meu boleto!</button>
  </div>
 </div>
 </div>

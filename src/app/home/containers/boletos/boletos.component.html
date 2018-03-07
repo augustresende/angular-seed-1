@@ -1,7 +1,7 @@
 <div class="card" style=" margin:5px auto;" >
   <div class="card-body" style="max-width:42rem;width:100%;margin: 5vh auto 5vh auto;">
     <h5 class="card-title">Pagar Boleto</h5>
-    <p class="card-text">Insira o código do boleto para realizar o pagamento</p>
+    <p class="card-text">Insira os dados do boleto para efetuar o pagamento!</p>
     <br>
 
     <div class="form-group">
@@ -12,13 +12,13 @@
     <div class="col">
      <div class="form-group">
        <label for="bl-vencimento">Vencimento</label>
-       <input [textMask]="{mask: masks.date}" name="bl-vencimento" [(ngModel)]="data.vencimento" type="text" class="form-control" placeholder="00/00/0000">
+       <input [textMask]="{mask: masks.date}" name="bl-vencimento" [(ngModel)]="datavencimento" type="text" class="form-control" placeholder="00/00/0000">
      </div>
    </div>
    <div class="col">
      <div class="form-group">
        <label for="bl-valor">Valor</label>
-       <input name="bl-valor" [textMask]="{mask: masks.value}" [(ngModel)]="data.value" type="text" class="form-control" placeholder="R$ 0,00">
+       <input name="bl-valor" [textMask]="{mask: masks.value}" [(ngModel)]="datavalue" type="text" class="form-control" placeholder="R$ 0,00">
      </div>
    </div>
  </div>
@@ -26,7 +26,7 @@
  <br>
  <br>
  <div style="float:rigth">
-  <button [swal]="{ title: 'Escreva seu Email:', input: 'email' }" (confirm)="openModal(template, $event)" type="button" class="btn btn-primary">Continuar Pagamento</button>
+  <button [swal]="{ title: 'Digite seu Email:', input: 'email' }" (confirm)="openModal(template, comprovante, $event)" type="button" class="btn btn-primary">Pagar meu boleto!</button>
  </div>
 </div>
 </div>
@@ -42,15 +42,15 @@
   	<div class="">
   		<div style="float:">
         <div style="line-height: 50px;font-size: 18px;">
-          Realize o depósito de <b>{{pagamento.crypto_value}} RaiBlocks</b> na carteira:
+          Realize o depósito de <b>{{pagamento.crypto_value}} Nanos</b> na carteira:
         </div>
-        <img style="width: 130px;background: #fff;margin: 14px auto!important;border-radius: 4px;display: block;" src="https://upload.wikimedia.org/wikipedia/commons/c/c6/WM2007_QRCode.svg"  alt="">
+ <!--       <img style="width: 130px;background: #fff;margin: 14px auto!important;border-radius: 4px;display: block;" src="https://upload.wikimedia.org/wikipedia/commons/c/c6/WM2007_QRCode.svg"  alt="">
       </div>
       <div style="text-align:center; width:100%; opacity:0.3;">
-       Ou
-     </div>
+       Ou-->
+     </div> 
      <div class="form-group">
-      <input type="email" class="form-control" [value]="pagamento.address">
+      <input class="form-control" [value]="pagamento.address">
     </div>
   </div>
   <br>
@@ -64,7 +64,7 @@
     <br>
   </div>
   <br>
-  <button (click)="modalRef.hide() || openComprovante(comprovante)"  class="btn btn-primary">Continuar</button>
+  <!-- <button (click)="modalRef.hide() || openComprovante(comprovante)"  class="btn btn-primary">Continuar</button> -->
 
 
 </div>
@@ -90,7 +90,7 @@
 </header><!-- /header -->
     <hr>
     <h4><b>PAGAMENTO DE BOLETO</b></h4>
-    <p>PROTOCOLO  <b> 0014785441</b> - <b>29/01/2018 11:01</b></p>
+<!--  <p>PROTOCOLO  <b> 0014785441</b> - <b>29/01/2018 11:01</b></p>
     <p>TERM <b>228022</b> AGENTE <b>228018</b> AUTE <b>00942</b> </p>
     <hr>
     <p>03399.88081 09000.070004 05217.201010 6 74200000066163 </p>
@@ -98,7 +98,9 @@
     <p>BANCO <b>SANTANDER S.A</b></p>
     <hr>
     <h5>VALOR: R$ 661,63</h5>
-    <p style="font-size: 10px!important;margin-top: -8px;">VALIDO COMO RECIBO DE PAGAMENTO</p>
+    <p style="font-size: 10px!important;margin-top: -8px;">VALIDO COMO RECIBO DE PAGAMENTO</p> -->
+	<p>Seu boleto está sendo pago!</p>
+	<p>Em breve você receberá o comprovante de pagamento no seu email</p>
 
 
     

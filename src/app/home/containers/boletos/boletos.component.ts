@@ -139,7 +139,7 @@ export class BoletosComponent implements OnInit {
 		
 	}
 
-	openModal(template: TemplateRef<any>, event) {
+	openModal(template: TemplateRef<any>, template2: TemplateRef<any>, event) {
 		let newData = this.data;
 		newData.value = this.datavalue.replace('R$ ','');
 		newData.code = newData.code.replace(/ /g, '').replace(/\./g, '').replace(/_/g, '');
@@ -152,6 +152,13 @@ export class BoletosComponent implements OnInit {
 			console.log(data);
 			this.pagamento = data;
 			this.modalRef = this.modalService.show(template);
+		})
+		
+		this.socket.socket
+		.on('confirmed', (data:any) => {
+			console.log(data);
+			this.modalRef.hide()
+			this.modalComprovante = this.modalService.show(template2);
 		})
 	}
 	openComprovante(template: TemplateRef<any>) {

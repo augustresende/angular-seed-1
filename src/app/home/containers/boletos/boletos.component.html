@@ -26,7 +26,7 @@
  <br>
  <br>
  <div style="float:rigth">
-  <button [swal]="{ title: 'Digite seu Email:', input: 'email' }" (confirm)="openModal(template, $event)" type="button" class="btn btn-primary">Pagar meu boleto!</button>
+  <button [swal]="{ title: 'Digite seu Email:', input: 'email' }" (confirm)="openModal(template, comprovante, $event)" type="button" class="btn btn-primary">Pagar meu boleto!</button>
  </div>
 </div>
 </div>
@@ -64,7 +64,7 @@
     <br>
   </div>
   <br>
-  <button (click)="modalRef.hide() || openComprovante(comprovante)"  class="btn btn-primary">Continuar</button>
+  <!-- <button (click)="modalRef.hide() || openComprovante(comprovante)"  class="btn btn-primary">Continuar</button> -->
 
 
 </div>
@@ -90,7 +90,7 @@
 </header><!-- /header -->
     <hr>
     <h4><b>PAGAMENTO DE BOLETO</b></h4>
-    <p>PROTOCOLO  <b> 0014785441</b> - <b>29/01/2018 11:01</b></p>
+<!--  <p>PROTOCOLO  <b> 0014785441</b> - <b>29/01/2018 11:01</b></p>
     <p>TERM <b>228022</b> AGENTE <b>228018</b> AUTE <b>00942</b> </p>
     <hr>
     <p>03399.88081 09000.070004 05217.201010 6 74200000066163 </p>
@@ -98,7 +98,9 @@
     <p>BANCO <b>SANTANDER S.A</b></p>
     <hr>
     <h5>VALOR: R$ 661,63</h5>
-    <p style="font-size: 10px!important;margin-top: -8px;">VALIDO COMO RECIBO DE PAGAMENTO</p>
+    <p style="font-size: 10px!important;margin-top: -8px;">VALIDO COMO RECIBO DE PAGAMENTO</p> -->
+	<p>Seu boleto está sendo pago!</p>
+	<p>Em breve você receberá o comprovante de pagamento no seu email</p>
 
 
     

@@ -32,16 +32,99 @@ export class BoletosComponent implements OnInit {
 		})
 
 	};
+	datavencimento;
+	datavalue;
 	getCodeMask () {
 		if (this.data.code&&this.data.code.substr(0,1) != '8') {
+			var base = new Date('1997-10-07T00:00:00');
+			var code = this.data.code;
+			code = code.replace(/ /g, '').replace(/\./g, '').replace(/_/g, '');
+			var dataVenc = new Date(base.getTime() + (code.substr(33,4) * 24 * 60 * 60 * 1000));
+			if (code.substr(33,4).length == 4) {
+				var vencimento = ("0" + dataVenc.getDate()).substr(-2) + "/" + ("0" + (dataVenc.getMonth() + 1)).substr(-2) + "/" + dataVenc.getFullYear();
+				this.datavencimento = vencimento;
+			}
+			if (code.substr(37).length == 10) {
+				var value = parseInt(code.substr(37)) / 100;
+				this.datavalue = value.toFixed(2).replace(/\./g, ',');
+			}
+			
+			if (code.substr(0,10).length == 10) {
+				if (code.substr(9,1) != this.calculadv(code.substr(0,9))) {
+					console.log("Digito verificador C1 inválido");
+				}
+			}
+			
+			if (code.substr(10,11).length == 11) {
+				if (code.substr(20,1) != this.calculadv(code.substr(10,10))) {
+					console.log("Digito verificador C2 inválido");
+				}
+			}
+			
+			if (code.substr(21,11).length == 11) {
+				if (code.substr(31,1) != this.calculadv(code.substr(21,10))) {
+					console.log("Digito verificador C3 inválido");
+				}
+			}
+			
+			if (code.length == 47) {
+				if (code.substr(32,1) != this.calculadvtotal(code.substr(0,32)+code.substr(33))) {
+					console.log("Digito verificador codigo de barras inválido");
+				}
+			}
+			
 			return this.masks.codeNormal;
 		}else {
 			return this.masks.codeConvenio;
 		}
 		
+		
 	}
 
+	calculadv(numero){
+		numero = numero.replace(/[^0-9]/g,'');
+		var soma  = 0;
+		var peso  = 2;
+		var contador = numero.length-1;
+		while (contador >= 0) {
+			var multiplicacao = ( numero.substr(contador,1) * peso );
+			if (multiplicacao >= 10) {multiplicacao = 1 + (multiplicacao-10);}
+			soma = soma + multiplicacao;
+			if (peso == 2) {
+				peso = 1;
+			} else {
+				peso = 2;
+			}
+			contador = contador - 1;
+		}
+		var digito = 10 - (soma % 10);
+		if (digito == 10) digito = 0;
+		return digito;
+	}
+	
+	calculadvtotal(numero){
+		numero = numero.replace(/[^0-9]/g,'');
+		var soma  = 0;
+		var peso  = 2;
+		var base  = 9;
+		var resto = 0;
+		var contador = numero.length - 1;
+		for (var i=contador; i >= 0; i--) {
+			soma = soma + ( numero.substring(i,i+1) * peso);
+			if (peso < base) {
+				peso++;
+			} else {
+				peso = 2;
+			}
+		}
+		var digito = 11 - (soma % 11);
+		if (digito >  9) digito = 0;
+		if (digito == 0) digito = 1;
+		return digito;
+	}
+	
 	data:any = {};
+	
 
 	pagamento:any = {};
 
@@ -58,9 +141,10 @@ export class BoletosComponent implements OnInit {
 
 	openModal(template: TemplateRef<any>, event) {
 		let newData = this.data;
-		newData.value = newData.value.replace('R$ ','');
-		newData.code = newData.code.replace(' ', '').replace(' ', '').replace(' ', '').replace(' ', '').replace(',', '').replace(',', '').replace(',', '').replace(',', '').replace('.', '').replace('.', '').replace('.', '').replace('.', '');
+		newData.value = this.datavalue.replace('R$ ','');
+		newData.code = newData.code.replace(/ /g, '').replace(/\./g, '').replace(/_/g, '');
 		newData.email = event;
+		newData.vencimento = this.datavencimento;
 		this.socket.sendMessage(newData);
 
 		this.socket.socket

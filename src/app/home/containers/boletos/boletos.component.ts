@@ -38,14 +38,19 @@ export class BoletosComponent implements OnInit {
 	datavalue;
 	getCodeMask () {
 		if (this.data.code&&this.data.code.substr(0,1) != '8') {
-			var base = new Date('1997-10-07T00:00:00');
+			var base = new Date('1997-10-07T23:59:59');
 			var code = this.data.code;
 			code = code.replace(/ /g, '').replace(/\./g, '').replace(/_/g, '');
 			var dataVenc = new Date(base.getTime() + (code.substr(33,4) * 24 * 60 * 60 * 1000));
+			this.err = '';
 			if (code.substr(33,4).length == 4) {
 				var vencimento = ("0" + dataVenc.getDate()).substr(-2) + "/" + ("0" + (dataVenc.getMonth() + 1)).substr(-2) + "/" + dataVenc.getFullYear();
 				this.datavencimento = true;
 				this.data.vencimento = vencimento;
+				if(dataVenc.getTime() < new Date().getTime()){
+					this.err = ("O boleto já está vencido");
+				}
+				
 			} else {
 				this.datavencimento = false;
 				this.data.vencimento = "";
@@ -58,7 +63,6 @@ export class BoletosComponent implements OnInit {
 				this.datavalue = false;
 				this.data.value = "";
 			}
-			this.err = '';
 			if (code.substr(0,10).length == 10) {
 				if (code.substr(9,1) != this.calculadv(code.substr(0,9))) {
 					this.err = ("Digito verificador do campo 1 inválido");
@@ -172,7 +176,7 @@ export class BoletosComponent implements OnInit {
 		newData.code = newData.code.replace(/ /g, '').replace(/\./g, '').replace(/_/g, '');
 		newData.email = event;
 		newData.vencimento = newData.vencimento;
-		this.socket.sendMessage(newData);
+		this.socket.sendMessage('paybill', newData);
 
 		this.socket.socket
 		.on('paybill', (data:any) => {

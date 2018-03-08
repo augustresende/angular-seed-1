@@ -1,30 +1,35 @@
-<div class="card" style="margin:10px auto; margin-left: 20px;" >
+<div class="card" style="margin:10px auto;" >
   <div class="card-body">
     <h2 class="card-title" style="max-width:340px; margin:0 auto; text-align: center;">Recarga de Celular</h2>
     <br>
 
     <div class="form-group" style="max-width:28ch; margin:0 auto;">
      <label for="exampleFormControlInput1">Digite o número do celular:</label>
-     <input [(ngModel)]="recarga.number" [textMask]="{mask: phoneMask, guide: false}" style="font-size:30px;" type="text" class="form-control" placeholder="(99) 99999-9999" value="">
-     <img class="logoop" src="assets/images/vivo.png" alt="">
+     <input [(ngModel)]="recarga.number" [textMask]="{mask: getRecargaMask(), guide: false}" style="font-size:30px;" type="text" class="form-control" placeholder="(99) 99999-9999" value="">
+     <img class="logoop" src="{{logopath()}}" alt="">
    </div>
    <br>
    <div class="form-group" style="max-width:340px; margin:0 auto;">
-     <label style="width:100%;" for="exampleFormControlInput1">Valor desejado:</label>
+     <label style="width:100%;" for="exampleFormControlInput1">Escolha o valor da recarga:</label>
      <div style="margin: 0 auto!important;display: flex;">
      	
      
-<div style="margin: 0 auto;" class="btn-group btn-group-toggle orm-control rechargevalues" data-toggle="buttons">
+<div style="margin: 0 auto;" class="btn-group btn-group-toggle orm-control rechargevalues" data-toggle="buttons" *ngFor="let value of values">
+
+  <label class="btn btn-primary" [ngClass]="{'active':recarga.value==value}">
+    <input type="radio" [(ngModel)]="recarga.value" value="{{value}}">R$ {{value}}
+  </label>
+<!--
   <label class="btn btn-primary" [ngClass]="{'active':recarga.value==13}">
-        <input type="radio" [(ngModel)]="recarga.value"  name="ta" value="13">R$ 13
+    <input type="radio" [(ngModel)]="recarga.value" value="13">R$ 13
   </label>
   <label class="btn btn-primary" [ngClass]="{'active':recarga.value==15}">
-    <input type="radio" [(ngModel)]="recarga.value"  name="tb" value="15">R$ 15
+    <input type="radio" [(ngModel)]="recarga.value" value="15">R$ 15
   </label>
   <label class="btn btn-primary" [ngClass]="{'active':recarga.value==20}">
-    <input type="radio" [(ngModel)]="recarga.value"  name="ta" value="20">R$ 20
-    
+    <input type="radio" [(ngModel)]="recarga.value" value="20">R$ 20
   </label>
+--> 
 </div>
 </div>
    </div>
@@ -32,7 +37,97 @@
 	<br>
 	<br>
 	<div style="">
-		<button (click)="submitRecarga()" style="margin:0 auto; display:block;" type="button" class="btn btn-primary">Recarregar!</button>
+		<button (click)="submitRecarga(template, comprovante)" style="margin:0 auto; display:block;" type="button" class="btn btn-primary">Recarregar!</button>
 	</div>
   </div>
 </div>
+
+<ng-template #template class="modal-pay">
+  <div class="modal-header">
+    <h4 style="padding-left:30px;" class="modal-title pull-left">Confirme o pagamento:</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" style="padding-left:50px; padding-right:50px; padding-bottom:50px;">
+  	<div class="">
+  		<div style="float:">
+        <div style="line-height: 50px;font-size: 18px;">
+          Realize o depósito de <b>{{pagamento.crypto_value}} Nanos</b> na carteira:
+        </div>
+ <!--       <img style="width: 130px;background: #fff;margin: 14px auto!important;border-radius: 4px;display: block;" src="https://upload.wikimedia.org/wikipedia/commons/c/c6/WM2007_QRCode.svg"  alt="">
+      </div>
+      <div style="text-align:center; width:100%; opacity:0.3;">
+       Ou-->
+     </div> 
+     <div class="form-group">
+      <input class="form-control" [value]="pagamento.address">
+    </div>
+  </div>
+  <br>
+
+  <div style="text-align:right">
+    * Expira em: {{tick}} segundos
+  </div> 
+  <div class="bar">
+
+    <div class="complete" [style.width.%]="tick/tick_total*100"></div>
+    <br>
+  </div>
+  <br>
+  <!-- <button (click)="modalRef.hide() || openComprovante(comprovante)"  class="btn btn-primary">Continuar</button> -->
+
+
+</div>
+</ng-template>
+
+<div class="comprovante-modal">
+<ng-template #comprovante class="modal-pay">
+  <div class="modal-header">  
+    <h4 style="padding-left:30px;" class="modal-title pull-left">Comprovante de Recarga:</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalComprovante.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body comp" id="comprovante" style="padding-left:50px; background:#001432; padding-right:50px; padding-bottom:50px;">
+    <!-- <img src="/assets/images/XRB.svg" class="bg" alt=""> -->
+
+    <header>
+  <div class="borda"></div>
+  <div class="logo">
+    <img style="margin-top:15px;" src="/assets/images/XRB.svg" alt="">
+  </div>
+  <div class="text">Pague com Nano</div>
+</header><!-- /header -->
+    <hr>
+    <h4><b>RECARGA DE CELULAR</b></h4>
+	<div [innerHTML]="comprovante"> 
+<!--  <p>PROTOCOLO  <b> 0014785441</b> - <b>29/01/2018 11:01</b></p>
+    <p>TERM <b>228022</b> AGENTE <b>228018</b> AUTE <b>00942</b> </p>
+    <hr>
+    <p>03399.88081 09000.070004 05217.201010 6 74200000066163 </p>
+    <p>AUTO <b>014025</b> RECEBIMENTO CONTA</p>
+    <p>BANCO <b>SANTANDER S.A</b></p>
+    <hr>
+    <h5>VALOR: R$ 661,63</h5>
+    <p style="font-size: 10px!important;margin-top: -8px;">VALIDO COMO RECIBO DE PAGAMENTO</p> 
+	<p>O seu celular foi recarregado!</p>
+	<p></p> -->
+	</div>
+
+
+    
+  </div>
+  <div style="display:none;">
+    <canvas id="canvas"></canvas>
+  </div>
+  <button (click)="printComprovante()" class="btn btn-primary"> Imprimir </button>
+</ng-template>
+</div>
+
+<swal customClass="loading" #loading title="Já recebemos o seu pagamento e estamos recarregando o seu celular, é rapidinho 😉">
+  <div  *swalPartial>
+  <img style="max-width:110px; margin:0 auto;border-radius: 30px;margin-top:25px; display:block; background:#fff;" src="/assets/images/loading.svg" alt="">
+    
+  </div>
+<swal>

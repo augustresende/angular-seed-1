@@ -10,8 +10,8 @@ export class SocketService {
   private url = 'http://179.221.104.89:85';  
   public socket = io(this.url);
   
-  sendMessage(message){
-    this.socket.emit('paybill',message);    
+  sendMessage(type,message){
+    this.socket.emit(type,message);    
   }
   
   getMessages(type) {

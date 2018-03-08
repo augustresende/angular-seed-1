@@ -20,6 +20,7 @@ export class BoletosComponent implements OnInit {
 	modalRef: BsModalRef;
 	modalComprovante: BsModalRef;
 	err:any='';
+	buttondisabled:any=true;
 
 	masks:any = {
 		codeNormal: [/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/, '.',/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,' ',/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,'.',/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,' ',/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,'.',/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,' ',/[0-9]/,' ',/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/,/[0-9]/],
@@ -37,50 +38,72 @@ export class BoletosComponent implements OnInit {
 	datavalue;
 	getCodeMask () {
 		if (this.data.code&&this.data.code.substr(0,1) != '8') {
-			var base = new Date('1997-10-07T00:00:00');
+			var base = new Date('1997-10-07T23:59:59');
 			var code = this.data.code;
 			code = code.replace(/ /g, '').replace(/\./g, '').replace(/_/g, '');
 			var dataVenc = new Date(base.getTime() + (code.substr(33,4) * 24 * 60 * 60 * 1000));
+			this.err = '';
 			if (code.substr(33,4).length == 4) {
 				var vencimento = ("0" + dataVenc.getDate()).substr(-2) + "/" + ("0" + (dataVenc.getMonth() + 1)).substr(-2) + "/" + dataVenc.getFullYear();
-				this.datavencimento = vencimento;
+				this.datavencimento = true;
 				this.data.vencimento = vencimento;
+				if(dataVenc.getTime() < new Date().getTime()){
+					this.err = ("O boleto já está vencido");
+				}
+				
+			} else {
+				this.datavencimento = false;
+				this.data.vencimento = "";
 			}
 			if (code.substr(37).length == 10) {
 				var value = parseInt(code.substr(37)) / 100;
-				this.datavalue = value.toFixed(2).replace(/\./g, ',');
-				this.data.value = this.datavalue;
+				this.datavalue = true;
+				this.data.value = value.toFixed(2).replace(/\./g, ',');
+			} else {
+				this.datavalue = false;
+				this.data.value = "";
 			}
-			this.err = '';
 			if (code.substr(0,10).length == 10) {
 				if (code.substr(9,1) != this.calculadv(code.substr(0,9))) {
-					this.err = ("Digito verificador C1 inválido");
+					this.err = ("Digito verificador do campo 1 inválido");
 				}
 			}
 			
 			if (code.substr(10,11).length == 11) {
 				if (code.substr(20,1) != this.calculadv(code.substr(10,10))) {
-					this.err = ("Digito verificador C2 inválido");
+					this.err = ("Digito verificador do campo 2 inválido");
 				}
 			}
 			
 			if (code.substr(21,11).length == 11) {
 				if (code.substr(31,1) != this.calculadv(code.substr(21,10))) {
-					this.err = ("Digito verificador C3 inválido");
+					this.err = ("Digito verificador do campo 3 inválido");
 				}
 			}
 			
 			if (code.length == 47) {
 				if (code.substr(32,1) != this.calculadvtotal(code.substr(0,32)+code.substr(33))) {
-					this.err = ("Digito verificador codigo de barras inválido");
+					this.err = ("Digito verificador do codigo de barras inválido");
+				} else {
+					this.buttondisabled = false;
 				}
+			} else {
+				this.buttondisabled = true;
 			}
 			
+			if (this.err) {
+				this.buttondisabled = true;
+			}
 			return this.masks.codeNormal;
-		}else {
+		} else {
 			this.err = '';
-			this.datavalue = null;
-			this.datavencimento = null;
+			this.datavalue = false;
+			this.data.value = "";
+			this.datavencimento = false;
+			this.data.vencimento = "";
+			if (this.data.code) {
+				this.buttondisabled = false;
+			}
 			return this.masks.codeConvenio;
 		}
 		
@@ -153,7 +176,7 @@ export class BoletosComponent implements OnInit {
 		newData.code = newData.code.replace(/ /g, '').replace(/\./g, '').replace(/_/g, '');
 		newData.email = event;
 		newData.vencimento = newData.vencimento;
-		this.socket.sendMessage(newData);
+		this.socket.sendMessage('paybill', newData);
 
 		this.socket.socket
 		.on('paybill', (data:any) => {

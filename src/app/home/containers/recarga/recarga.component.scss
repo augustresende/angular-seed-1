@@ -67,3 +67,36 @@ select.form-control {
         margin: 0px!important;    
     }
 }
+
+.modal-dialog {
+    max-width: 720px!important;
+}
+
+.modal-body.comp {
+    position: relative;
+    padding-left: 50px;
+    background: #001432;
+    padding-right: 50px;
+    max-width: 400px;
+    background-size: 102% 102%!important;
+    background-position: -3px!important;
+    background-image: url(/assets/images/bg-padron.png)!important;
+    width: 100%;
+    padding-bottom: 50px;
+    margin: 0 auto;
+
+}
+
+.bar {
+    height: 6px;
+    background: rgba(0, 70, 227, 0.47058823529411764);
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.complete {
+    background: rgb(0, 70, 227);
+    width: 40%;
+    height: 6px;
+    border-radius: 5px;
+}

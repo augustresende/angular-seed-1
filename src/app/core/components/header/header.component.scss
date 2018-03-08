@@ -14,10 +14,19 @@ header {
   	color: #fff;
   	font-size: 21px;
   }
+  .text:focus {
+  	outline: none !important;
+  }
+  .area {
+  	cursor: pointer;
+  }
 }
 .logo img {
     width: 40px;
     float: left;
     margin-right: 20px;
     margin-left: 10px;
+}
+.logo:focus {
+    outline: none !important;
 }
